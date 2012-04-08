@@ -3,7 +3,7 @@ Douban Gallery is a pure javascript web gallery for Douban. A gallery for certai
 
 ## Example
 
-Douban Gallery only support movie collection now and the UI is poor. Specify user id in url like: <http://doubangallery.github.com/#hzqtc>. Replace the user id after '#' to anyone with a open profile.
+Douban Gallery only support movie collection now and the UI is poor. Specify user id in url like: <http://hzqtc.github.com/doubangallery/#hzqtc>. Replace the user id after '#' to anyone with a open profile.
 
 ## TO-DOs
 
