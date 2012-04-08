@@ -7,7 +7,7 @@ var gallery = {
     more: true,
 
     loadCollection: function() {
-        if(this.more)
+        if(this.more && this.user != '')
         {
             api = 'http://api.douban.com/people/' + this.user + '/collection?alt=xd&callback=?';
             $.getJSON(api, { 'cat': this.cat, 'status': this.type, 'start-index': this.loaded + 1, 'max-results': this.max }, addCollection);
@@ -26,17 +26,21 @@ function addCollection(collection) {
         alt = item['db:subject']['title']['$t'];
         $('<img/>').attr('src', img).appendTo("#gallery").wrap('<a title="' + alt + '" href="' + url + '"></a>');
     });
+    $(window).on('scroll', autoload);
+}
+
+function autoload() {
+    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        $(window).off('scroll', autoload);
+        gallery.loadCollection();
+    }
 }
 
 $(function() {
-    gallery.user = 'hzqtc';
+    url = window.location.href;
+    gallery.user = url.substr(url.lastIndexOf('#') + 1);
     gallery.cat = 'movie';
     gallery.type = 'watched';
+    gallery.loaded = 0;
     gallery.loadCollection();
-
-    $(window).scroll(function() {
-        if($(window).scrollTop() + $(window).height() == $(document).height()) {
-            gallery.loadCollection();
-        }
-    });
 });
